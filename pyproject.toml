@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sindhinltk"
+version = "1.0.0"
+description = "A Morphology-Aware, Neural-Hybrid NLP Toolkit for Sindhi"
+readme = "README.md"
+authors = [{ name = "Aakash Meghwar" }]
+dependencies = [
+    "transformers>=4.0.0",
+    "tokenizers>=0.10.0",
+    "regex",
+    "torch"
+]
+
+[tool.setuptools]
+packages = ["sindhinltk"]

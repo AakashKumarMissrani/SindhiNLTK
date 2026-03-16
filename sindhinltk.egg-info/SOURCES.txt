@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+sindhinltk/__init__.py
+sindhinltk/normalizer.py
+sindhinltk/sentiment.py
+sindhinltk/stemmer.py
+sindhinltk/stopwords.py
+sindhinltk/tokenizer.py
+sindhinltk.egg-info/PKG-INFO
+sindhinltk.egg-info/SOURCES.txt
+sindhinltk.egg-info/dependency_links.txt
+sindhinltk.egg-info/requires.txt
+sindhinltk.egg-info/top_level.txt
