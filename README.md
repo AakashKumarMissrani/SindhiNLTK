@@ -1,6 +1,6 @@
 # 🛡️ SindhiNLTK: A Morphology-Aware NLP Toolkit
 
-[![PyPI version](https://badge.fury.io/py/sindhinltk.svg)](https://pypi.org/project/sindhinltk/)
+[![PyPI version](https://img.shields.io/pypi/v/sindhinltk.svg)](https://pypi.org/project/sindhinltk/)
 [![Hugging Face Hub](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-SindhiNLTK-blue)](https://huggingface.co/aakashMeghwar01/SindhiNLTK)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
