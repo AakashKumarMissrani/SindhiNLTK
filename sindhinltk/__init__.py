@@ -1,33 +1,33 @@
 """
-SindhiNLTK — A Morphology-Aware, Neural-Hybrid NLP Toolkit for Sindhi.
+sindhinltk — Sindhi Natural Language Toolkit
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+A pure-Python NLP library for the Sindhi language (Arabic script).
 
-Features:
-    - Anti-Shatter Tokenizer (V3 Linguistic Shield)
-    - Morphological Stemmer (rule-based suffix stripping)
-    - Stopword Removal (expanded corpus-derived list)
-    - NFKC Normalization (Sindhi-specific Unicode handling)
-    - Neural Sentiment Engine (optional, requires transformers)
-    - Curated Datasets (stopwords, benchmarks) — NEW in v1.1
-
-Install:
-    pip install sindhinltk
-
-Usage:
-    >>> from sindhinltk import stemmer, stopwords, normalizer
-    >>> from sindhinltk.datasets import get_stopwords_expanded
-
-Links:
-    PyPI:       https://pypi.org/project/sindhinltk/
-    GitHub:     https://github.com/AakashKumarMissrani/SindhiNLTK
-    HuggingFace: https://huggingface.co/aakashMeghwar01
+    from sindhinltk.tokenizer  import SindhiTokenizer
+    from sindhinltk.normalizer import SindhiNormalizer
+    from sindhinltk.stemmer    import SindhiStemmer
+    from sindhinltk.stopwords  import SindhiStopwords
+    from sindhinltk.sentiment  import SindhiSentiment
+    from sindhinltk.datasets   import SindhiDatasets
 """
 
-__version__ = "1.1.0"
-__author__ = "Aakash Meghwar"
+__version__ = "1.3.0"
+__author__  = "Aakash Meghwar"
+__email__   = "aakashmeghwar01@gmail.com"
+__license__ = "Apache-2.0"
 
-from sindhinltk import stemmer
-from sindhinltk import stopwords
-from sindhinltk import normalizer
+from sindhinltk.tokenizer  import SindhiTokenizer
+from sindhinltk.normalizer import SindhiNormalizer
+from sindhinltk.stemmer    import SindhiStemmer
+from sindhinltk.stopwords  import SindhiStopwords
+from sindhinltk.sentiment  import SindhiSentiment
+from sindhinltk.datasets   import SindhiDatasets
 
-# New in v1.1
-from sindhinltk import datasets
+__all__ = [
+    "SindhiTokenizer",
+    "SindhiNormalizer",
+    "SindhiStemmer",
+    "SindhiStopwords",
+    "SindhiSentiment",
+    "SindhiDatasets",
+]

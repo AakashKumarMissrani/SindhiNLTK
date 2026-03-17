@@ -1,53 +1,44 @@
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+build-backend = "setuptools.backends.legacy:build"
 
 [project]
 name = "sindhinltk"
-version = "1.1.0"
-description = "A Morphology-Aware, Neural-Hybrid NLP Toolkit for Sindhi — featuring expanded stopwords, tokenizer benchmarks, and 1.06 Token Fertility Rate."
+version = "1.3.0"
+description = "Sindhi Natural Language Toolkit — tokenizer, stemmer, stopwords, sentiment, normalizer"
 readme = "README.md"
-license = {text = "MIT"}
-requires-python = ">=3.8"
+license = "Apache-2.0"
 authors = [
-    {name = "Aakash Meghwar", email = "aakashmeghwar01@gmail.com"},
+  { name = "Aakash Meghwar", email = "aakashmeghwar01@gmail.com" }
 ]
-keywords = [
-    "sindhi", "nlp", "tokenizer", "morphology", "stemmer",
-    "stopwords", "low-resource", "arabic-script", "computational-linguistics",
-]
+keywords = ["sindhi", "nlp", "tokenizer", "stemmer", "sentiment", "arabic-script", "low-resource"]
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Developers",
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Topic :: Scientific/Engineering :: Artificial Intelligence",
-    "Topic :: Text Processing :: Linguistic",
-    "Natural Language :: Sindhi",
-    "Operating System :: OS Independent",
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Natural Language :: Sindhi",
+  "Topic :: Text Processing :: Linguistic",
 ]
-dependencies = [
-    "regex>=2023.0",
-]
+requires-python = ">=3.8"
+dependencies = []   # zero hard deps — pure Python
 
 [project.optional-dependencies]
-sentiment = ["transformers>=4.20.0", "torch>=1.12.0"]
-all = ["transformers>=4.20.0", "torch>=1.12.0"]
+hf = ["transformers>=4.30"]   # only if you want HF-based tokenizer backend
 
 [project.urls]
-Homepage = "https://github.com/AakashKumarMissrani/SindhiNLTK"
+Homepage   = "https://github.com/AakashKumarMissrani/SindhiNLTK"
 Repository = "https://github.com/AakashKumarMissrani/SindhiNLTK"
-"Bug Tracker" = "https://github.com/AakashKumarMissrani/SindhiNLTK/issues"
-"Hugging Face" = "https://huggingface.co/aakashMeghwar01"
+Issues     = "https://github.com/AakashKumarMissrani/SindhiNLTK/issues"
 
 [tool.setuptools.packages.find]
-include = ["sindhinltk*"]
+where = ["."]
 
 [tool.setuptools.package-data]
 sindhinltk = ["data/*.json"]
