@@ -1,19 +1,53 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "sindhinltk"
-version = "1.0.0"
-description = "A Morphology-Aware, Neural-Hybrid NLP Toolkit for Sindhi"
+version = "1.1.0"
+description = "A Morphology-Aware, Neural-Hybrid NLP Toolkit for Sindhi — featuring expanded stopwords, tokenizer benchmarks, and 1.06 Token Fertility Rate."
 readme = "README.md"
-authors = [{ name = "Aakash Meghwar" }]
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+    {name = "Aakash Meghwar", email = "aakashmeghwar01@gmail.com"},
+]
+keywords = [
+    "sindhi", "nlp", "tokenizer", "morphology", "stemmer",
+    "stopwords", "low-resource", "arabic-script", "computational-linguistics",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: Linguistic",
+    "Natural Language :: Sindhi",
+    "Operating System :: OS Independent",
+]
 dependencies = [
-    "transformers>=4.0.0",
-    "tokenizers>=0.10.0",
-    "regex",
-    "torch"
+    "regex>=2023.0",
 ]
 
-[tool.setuptools]
-packages = ["sindhinltk"]
+[project.optional-dependencies]
+sentiment = ["transformers>=4.20.0", "torch>=1.12.0"]
+all = ["transformers>=4.20.0", "torch>=1.12.0"]
+
+[project.urls]
+Homepage = "https://github.com/AakashKumarMissrani/SindhiNLTK"
+Repository = "https://github.com/AakashKumarMissrani/SindhiNLTK"
+"Bug Tracker" = "https://github.com/AakashKumarMissrani/SindhiNLTK/issues"
+"Hugging Face" = "https://huggingface.co/aakashMeghwar01"
+
+[tool.setuptools.packages.find]
+include = ["sindhinltk*"]
+
+[tool.setuptools.package-data]
+sindhinltk = ["data/*.json"]
