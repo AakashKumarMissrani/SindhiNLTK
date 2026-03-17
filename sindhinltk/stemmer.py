@@ -22,6 +22,9 @@ class SindhiStemmer:
         "يندو",   # هلندو
         "يندا",   # هلندا
         "ندڙ",    # ڪندڙ → ڪ
+        "ندو",    # ڪندو → ڪ
+        "ندي",    # ڪندي → ڪ
+        "ندا",    # ڪندا → ڪ
         "ندي",    # ڪندي
         "ندو",    # ڪندو
         "ندا",    # ڪندا
@@ -47,7 +50,7 @@ class SindhiStemmer:
         "اً",    # tanwin
     ]
 
-    MIN_STEM = 2   # don't strip if result would be shorter
+    MIN_STEM = 1   # don't strip if result would be shorter
 
     def stem(self, word: str) -> str:
         """Return the stem of a single Sindhi word."""

@@ -11,10 +11,10 @@ A pure-Python NLP library for the Sindhi language (Arabic script).
     from sindhinltk.datasets   import SindhiDatasets
 """
 
-__version__ = "1.3.0"
+__version__ = "1.3.1"
 __author__  = "Aakash Meghwar"
 __email__   = "aakashmeghwar01@gmail.com"
-__license__ = "Apache-2.0"
+__license__ = "MIT"
 
 from sindhinltk.tokenizer  import SindhiTokenizer
 from sindhinltk.normalizer import SindhiNormalizer
