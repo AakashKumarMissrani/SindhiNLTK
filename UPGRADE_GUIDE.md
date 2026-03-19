@@ -1,98 +1,85 @@
-# Upgrade Guide: SindhiNLTK v1.0.4 → v1.1.0
+# SindhiNLTK User Guide  
+**Natural Language Toolkit for Sindhi Language**  
+**Version:** 1.3.1 (latest stable – March 2025)  
+**Author:** Aakash Meghwar  
+**License:** MIT  
+**PyPI:** https://pypi.org/project/sindhinltk/  
+**GitHub:** https://github.com/AakashKumarMissrani/SindhiNLTK  
 
-## What Changed
-
-```
-v1.0.4 (your current)          v1.1.0 (this package)
-├── sindhinltk/                 ├── sindhinltk/
-│   ├── __init__.py             │   ├── __init__.py          ← UPDATED (new version + datasets import)
-│   ├── stemmer.py              │   ├── stemmer.py           ← STUB — copy your v1.0.4 code
-│   ├── stopwords.py            │   ├── stopwords.py         ← STUB — copy your v1.0.4 code
-│   ├── normalizer.py           │   ├── normalizer.py        ← STUB — copy your v1.0.4 code
-│   └── (sentiment etc.)        │   ├── datasets.py          ← NEW — expanded stopwords API
-│                               │   └── data/
-│                               │       ├── __init__.py       ← NEW
-│                               │       └── stopwords_expanded.json  ← NEW (245 stopwords)
-├── pyproject.toml              ├── pyproject.toml            ← UPDATED (v1.1.0, new metadata)
-├── README.md                   ├── README.md                 ← UPDATED (v1.1 features + data sources)
-└── ...                         ├── CHANGELOG.md              ← NEW
-                                └── UPGRADE_GUIDE.md          ← NEW (this file)
-```
-
-## Step-by-Step Merge
-
-### 1. Copy your existing module code into the stubs
-
-The `stemmer.py`, `stopwords.py`, and `normalizer.py` files in this package
-are **stubs** with placeholder implementations. Replace them with your
-actual v1.0.4 code:
+## 1. Installation
 
 ```bash
-# From your v1.0.4 repo:
-cp v1.0.4/sindhinltk/stemmer.py    v1.1.0/sindhinltk/stemmer.py
-cp v1.0.4/sindhinltk/stopwords.py  v1.1.0/sindhinltk/stopwords.py
-cp v1.0.4/sindhinltk/normalizer.py v1.1.0/sindhinltk/normalizer.py
+pip install sindhinltk
 ```
-
-Also copy any other modules you have (sentiment engine, etc.):
-```bash
-cp v1.0.4/sindhinltk/sentiment.py  v1.1.0/sindhinltk/sentiment.py  # if exists
+ ## 2. Quick Start – All Modules in 30 seconds
 ```
+ from sindhinltk import *
 
-### 2. Keep these NEW files as-is
+text = "سنڌ جي حڪومت ڪاوڙيندڙ ٻارن کي مدد ڪندي."
 
-These are new in v1.1 and don't need modification:
-- `sindhinltk/datasets.py` — the new datasets API
-- `sindhinltk/data/stopwords_expanded.json` — 245 expanded stopwords
-- `sindhinltk/data/__init__.py` — makes `data/` a package for file loading
-- `CHANGELOG.md` — version history
+# Tokenization
+tokens = SindhiTokenizer().tokenize(text)
+sents  = SindhiTokenizer().sent_tokenize(text + " ٻيو جملو۔")
 
-### 3. Update __init__.py if you have extra modules
+# Normalization
+clean  = SindhiNormalizer().normalize(text, remove_diacritics=True)
 
-If your v1.0.4 has modules beyond stemmer/stopwords/normalizer
-(like a sentiment module), add them to `__init__.py`:
+# Stemming
+root   = SindhiStemmer().stem("ڪاوڙيندڙ")
+stemmed_list = SindhiStemmer().stem_tokens(tokens)
 
-```python
-# In sindhinltk/__init__.py, add:
-from sindhinltk import sentiment  # if you have this
+# Stopwords
+filtered = SindhiStopwords().remove_stopwords(tokens)
+is_stop  = SindhiStopwords().is_stopword("کي")
+
+# Sentiment (lexicon-based)
+score    = SindhiSentiment().analyze(text)   # مثبت / منفی / غير جانبدار
+
+print(tokens, sents, clean, root, score)
 ```
-
-### 4. Build and test locally
-
-```bash
-cd SindhiNLTK-v1.1/
-
-# Install in dev mode
-pip install -e .
-
-# Test existing features still work
-python -c "from sindhinltk import stemmer; print(stemmer.stem('ڪتابون'))"
-
-# Test new features
-python -c "from sindhinltk.datasets import get_stopwords_expanded; print(len(get_stopwords_expanded()))"
-
-# Test category filtering
-python -c "from sindhinltk.datasets import get_stopwords_by_category; print(get_stopwords_by_category('negation'))"
+## 3. Module Overview & Main Methods
 ```
+Module,Class,Main Methods,Purpose
 
-### 5. Build and publish to PyPI
-
-```bash
-# Build
-pip install build twine
-python -m build
-
-# Check the package
-twine check dist/*
-
-# Upload to PyPI
-twine upload dist/*
 ```
+## 4.Fertility Check (Tokenizer Quality)
 
-## Backward Compatibility
+```
+text = """[paste long Sindhi text here – 200+ words recommended]"""
+tokens = SindhiTokenizer().tokenize(text)
+words = text.split()
+fertility = len(tokens) / max(1, len(words))
+print(f"Fertility: {fertility:.2f}")   # Target: 1.30–1.45 on real text
 
-v1.1.0 is **fully backward compatible** with v1.0.4:
-- `from sindhinltk import stemmer, stopwords, normalizer` — still works
-- `stopwords.get_stopwords()` — returns the same original list
-- All existing function signatures are preserved
-- The new `datasets` module is additive only
+```
+## 5. Full Pipeline Example
+```
+from sindhinltk import *
+
+text = "سنڌ جي خوبصورت زمين سنڌو درياھ جي وهڪري سبب آباد آهي۔"
+
+tok = SindhiTokenizer()
+norm = SindhiNormalizer()
+stm = SindhiStemmer()
+sw = SindhiStopwords()
+sa = SindhiSentiment()
+
+clean_text = norm.normalize(text, remove_diacritics=True)
+tokens = tok.tokenize(clean_text)
+filtered = sw.remove_stopwords(tokens)
+stemmed = stm.stem_tokens(filtered)
+sentiment = sa.analyze(text)
+
+print("Clean:", clean_text)
+print("Tokens:", tokens)
+print("Filtered:", filtered)
+print("Stemmed:", stemmed)
+print("Sentiment:", sentiment)
+```
+## 6. Best Practices
+```
+Normalize before stemming/sentiment
+Use remove_diacritics=True for web/social text
+Test fertility on real varied Sindhi content (news, Wikipedia, books)
+Sentiment is basic lexicon method — not contextual
+```
